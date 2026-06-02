@@ -1,0 +1,19 @@
+{
+  "name": "@workspace/object-storage-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@uppy/core": "^5.2.0",
+    "@uppy/react": "^5.2.0",
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "~5.9.3"
+  }
+}

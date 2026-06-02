@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm --filter @workspace/artist-portfolio run build",
+  "outputDirectory": "artifacts/artist-portfolio/dist/public",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" }
+  ]
+}
