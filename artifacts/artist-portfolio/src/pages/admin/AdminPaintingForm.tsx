@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ImageIcon, Loader2, Save, X, Upload } from "lucide-react";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -40,10 +39,11 @@ export default function AdminPaintingForm() {
   const [formData, setFormData] = useState({
     title: "",
     year: new Date().getFullYear(),
-    medium: "Oil",
+    medium: "",
     size: "",
     price: 0,
     available: true,
+    featured: false,
     description: "",
     seriesId: "none",
     imageUrl: ""
@@ -68,6 +68,7 @@ export default function AdminPaintingForm() {
         size: painting.size,
         price: painting.price,
         available: painting.available,
+        featured: painting.featured ?? false,
         description: painting.description,
         seriesId: painting.seriesId?.toString() ?? "none",
         imageUrl: painting.imageUrl ?? ""
@@ -159,20 +160,13 @@ export default function AdminPaintingForm() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="medium">Medium</Label>
-                  <Select 
-                    value={formData.medium} 
-                    onValueChange={v => setFormData(p => ({ ...p, medium: v }))}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select medium" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Oil">Oil</SelectItem>
-                      <SelectItem value="Watercolor">Watercolor</SelectItem>
-                      <SelectItem value="Acrylic">Acrylic</SelectItem>
-                      <SelectItem value="Mixed Media">Mixed Media</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    id="medium"
+                    value={formData.medium}
+                    onChange={e => setFormData(p => ({ ...p, medium: e.target.value }))}
+                    placeholder="e.g. Oil, Acrylic, Watercolor..."
+                    required
+                  />
                 </div>
               </div>
 
@@ -264,14 +258,25 @@ export default function AdminPaintingForm() {
                 </div>
               </div>
 
+              <div className="flex items-center justify-between py-4 border-t border-stone-100">
+                <div className="space-y-0.5">
+                  <Label htmlFor="featured">Feature on Home Page</Label>
+                  <p className="text-xs text-stone-500">Show as the hero painting</p>
+                </div>
+                <Switch
+                  id="featured"
+                  checked={formData.featured}
+                  onCheckedChange={v => setFormData(p => ({ ...p, featured: v }))}
+                />
+              </div>
               <div className="flex items-center justify-between py-4 border-y border-stone-100">
                 <div className="space-y-0.5">
                   <Label htmlFor="available">Available for Sale</Label>
                   <p className="text-xs text-stone-500">Show price and inquiry button</p>
                 </div>
-                <Switch 
-                  id="available" 
-                  checked={formData.available} 
+                <Switch
+                  id="available"
+                  checked={formData.available}
                   onCheckedChange={v => setFormData(p => ({ ...p, available: v }))}
                 />
               </div>

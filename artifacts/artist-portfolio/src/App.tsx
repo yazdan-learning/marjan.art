@@ -15,6 +15,7 @@ import AdminLogin from "@/pages/admin/AdminLogin";
 import AdminPaintings from "@/pages/admin/AdminPaintings";
 import AdminPaintingForm from "@/pages/admin/AdminPaintingForm";
 import AdminSeries from "@/pages/admin/AdminSeries";
+import AdminAbout from "@/pages/admin/AdminAbout";
 
 function Router() {
   return (
@@ -31,6 +32,7 @@ function Router() {
         <Route path="/admin/paintings/:id/edit" component={AdminPaintingForm} />
         <Route path="/admin/paintings" component={AdminPaintings} />
         <Route path="/admin/series" component={AdminSeries} />
+        <Route path="/admin/about" component={AdminAbout} />
         <Route path="/admin">
           {() => { window.location.replace("/admin/paintings"); return null; }}
         </Route>

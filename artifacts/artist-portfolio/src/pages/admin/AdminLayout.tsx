@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useAdminLogout } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Image as ImageIcon, Layers, LogOut, Menu, X } from "lucide-react";
+import { Image as ImageIcon, Layers, LogOut, Menu, X, User } from "lucide-react";
 import { useState } from "react";
 
 interface AdminLayoutProps {
@@ -25,6 +25,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const navItems = [
     { href: "/admin/paintings", label: "Paintings", icon: ImageIcon },
     { href: "/admin/series", label: "Series", icon: Layers },
+    { href: "/admin/about", label: "About Page", icon: User },
   ];
 
   return (

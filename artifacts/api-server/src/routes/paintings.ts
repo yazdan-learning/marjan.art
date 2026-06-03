@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { eq, and } from "drizzle-orm";
+import { eq, and, ne } from "drizzle-orm";
 import { db, paintingsTable } from "@workspace/db";
 import {
   ListPaintingsQueryParams,
@@ -39,6 +39,9 @@ router.post("/paintings", requireAdmin, async (req: Request, res: Response): Pro
     return;
   }
 
+  if (parsed.data.featured) {
+    await db.update(paintingsTable).set({ featured: false });
+  }
   const [row] = await db.insert(paintingsTable).values(parsed.data).returning();
   res.status(201).json(GetPaintingResponse.parse(row));
 });
@@ -81,6 +84,9 @@ router.patch("/paintings/:id", requireAdmin, async (req: Request, res: Response)
     return;
   }
 
+  if (parsed.data.featured) {
+    await db.update(paintingsTable).set({ featured: false }).where(ne(paintingsTable.id, id));
+  }
   const [row] = await db
     .update(paintingsTable)
     .set({ ...parsed.data, updatedAt: new Date() })

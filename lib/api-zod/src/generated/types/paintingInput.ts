@@ -22,5 +22,6 @@ export interface PaintingInput {
   description: string;
   /** @nullable */
   seriesId?: number | null;
+  featured?: boolean;
   displayOrder?: number;
 }

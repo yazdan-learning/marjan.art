@@ -19,6 +19,7 @@ export interface Painting {
   description: string;
   /** @nullable */
   seriesId?: number | null;
+  featured: boolean;
   displayOrder: number;
   createdAt: Date;
   updatedAt: Date;

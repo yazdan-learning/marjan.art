@@ -35,6 +35,7 @@ export const ListPaintingsResponseItem = zod.object({
   "imageUrl": zod.string().nullish(),
   "description": zod.string(),
   "seriesId": zod.number().nullish(),
+  "featured": zod.boolean(),
   "displayOrder": zod.number(),
   "createdAt": zod.coerce.date(),
   "updatedAt": zod.coerce.date()
@@ -62,6 +63,7 @@ export const CreatePaintingBody = zod.object({
   "imageUrl": zod.string().nullish(),
   "description": zod.string(),
   "seriesId": zod.number().nullish(),
+  "featured": zod.boolean().optional(),
   "displayOrder": zod.number().optional()
 })
 
@@ -84,6 +86,7 @@ export const GetPaintingResponse = zod.object({
   "imageUrl": zod.string().nullish(),
   "description": zod.string(),
   "seriesId": zod.number().nullish(),
+  "featured": zod.boolean(),
   "displayOrder": zod.number(),
   "createdAt": zod.coerce.date(),
   "updatedAt": zod.coerce.date()
@@ -112,6 +115,7 @@ export const UpdatePaintingBody = zod.object({
   "imageUrl": zod.string().nullish(),
   "description": zod.string().optional(),
   "seriesId": zod.number().nullish(),
+  "featured": zod.boolean().optional(),
   "displayOrder": zod.number().optional()
 })
 
@@ -126,9 +130,20 @@ export const UpdatePaintingResponse = zod.object({
   "imageUrl": zod.string().nullish(),
   "description": zod.string(),
   "seriesId": zod.number().nullish(),
+  "featured": zod.boolean(),
   "displayOrder": zod.number(),
   "createdAt": zod.coerce.date(),
   "updatedAt": zod.coerce.date()
+})
+
+export const GetAboutSettingsResponse = zod.object({
+  "bioText": zod.string().nullish(),
+  "imageUrl": zod.string().nullish(),
+})
+
+export const UpdateAboutSettingsBody = zod.object({
+  "bioText": zod.string().optional(),
+  "imageUrl": zod.string().nullish(),
 })
 
 

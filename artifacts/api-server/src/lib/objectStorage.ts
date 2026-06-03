@@ -48,7 +48,10 @@ export class ObjectStorageService {
       ...(contentType ? { ContentType: contentType } : {}),
     });
 
-    const uploadURL = await getSignedUrl(client, command, { expiresIn: 900 });
+    const uploadURL = await getSignedUrl(client, command, {
+      expiresIn: 900,
+      unhoistableHeaders: new Set(["x-amz-checksum-algorithm", "x-amz-sdk-checksum-algorithm"]),
+    });
     const publicURL = `${publicBaseUrl}/${key}`;
 
     return { uploadURL, publicURL };

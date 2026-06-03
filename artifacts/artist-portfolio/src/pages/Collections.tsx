@@ -4,17 +4,16 @@ import { useListPaintings, useListSeries } from "@workspace/api-client-react";
 import { PaintingCard } from "@/components/PaintingCard";
 import { Skeleton } from "@/components/ui/skeleton";
 
-type Medium = "All" | "Oil" | "Watercolor" | "Acrylic" | "Mixed Media";
 type ViewMode = "medium" | "series";
 
 export default function Collections() {
   const [viewMode, setViewMode] = useState<ViewMode>("medium");
-  const [filter, setFilter] = useState<Medium>("All");
+  const [filter, setFilter] = useState<string>("All");
 
   const { data: paintings, isLoading: paintingsLoading } = useListPaintings();
   const { data: series, isLoading: seriesLoading } = useListSeries();
 
-  const mediums: Medium[] = ["All", "Oil", "Watercolor", "Acrylic", "Mixed Media"];
+  const mediums = ["All", ...Array.from(new Set((paintings ?? []).map(p => p.medium).filter(Boolean))).sort()];
 
   const isLoading = paintingsLoading || seriesLoading;
 

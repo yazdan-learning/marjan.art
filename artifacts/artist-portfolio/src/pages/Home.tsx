@@ -39,8 +39,8 @@ export default function Home() {
     );
   }
 
-  const featuredPainting = paintings?.[0];
-  const recentWorks = paintings?.slice(1, 4) || [];
+  const featuredPainting = paintings?.find(p => p.featured) ?? paintings?.[0];
+  const recentWorks = paintings?.filter(p => p.id !== featuredPainting?.id).slice(0, 3) || [];
 
   return (
     <div className="w-full">

@@ -20,5 +20,6 @@ export interface PaintingUpdate {
   description?: string;
   /** @nullable */
   seriesId?: number | null;
+  featured?: boolean;
   displayOrder?: number;
 }

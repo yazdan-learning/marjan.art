@@ -15,6 +15,7 @@ export const paintingsTable = pgTable("paintings", {
   imageUrl: text("image_url"),
   description: text("description").notNull(),
   seriesId: integer("series_id").references(() => seriesTable.id, { onDelete: "set null" }),
+  featured: boolean("featured").notNull().default(false),
   displayOrder: integer("display_order").notNull().default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
