@@ -1,4 +1,6 @@
 {
+  "buildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/artist-portfolio run build",
+  "outputDirectory": "dist/public",
   "rewrites": [
     {
       "source": "/api/:path*",
